@@ -2,6 +2,8 @@ package com.homework18.dao.interfaces;
 
 import com.homework18.model.Project;
 
+import java.util.Optional;
+
 public interface ProjectDao {
     void createProject(Project project);
 
@@ -9,5 +11,5 @@ public interface ProjectDao {
 
     void updateProjectByName(int balance, String name);
 
-    Project getProjectById(int id);
+    Optional<Project> getProjectById(int id);
 }

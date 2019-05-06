@@ -4,16 +4,13 @@ import com.homework18.model.Project;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class ProjectMySqlDAOImplTest {
-    ApplicationContext context;
+    ClassPathXmlApplicationContext context;
     ProjectMySqlDAOImpl projectService;
 
     @Before
@@ -27,7 +24,7 @@ public class ProjectMySqlDAOImplTest {
         Project project = context.getBean("project", Project.class);
         project.setName("DC");
         projectService.createProject(project);
-        Project projectExpected = projectService.getProjectById(2);
+        Project projectExpected = projectService.getProjectById(2).get();
         assertEquals(project, projectExpected);
     }
 
@@ -37,7 +34,7 @@ public class ProjectMySqlDAOImplTest {
         project.setName("Dell");
         projectService.createProject(project);
         projectService.deleteProject(2);
-        assertTrue(Objects.isNull(projectService.getProjectById(2).getName()));
+        assertFalse(projectService.getProjectById(2).isPresent());
     }
 
     @Test
@@ -46,9 +43,8 @@ public class ProjectMySqlDAOImplTest {
         project.setName("DC");
         projectService.createProject(project);
         projectService.updateProjectByName(11111, "DC");
-        Project projectExpected = projectService.getProjectById(2);
+        Project projectExpected = projectService.getProjectById(2).get();
         assertEquals(projectExpected.getBalance(), 11111);
-
     }
 
     @Test
@@ -56,13 +52,12 @@ public class ProjectMySqlDAOImplTest {
         Project project = context.getBean("project", Project.class);
         project.setName("DC");
         projectService.createProject(project);
-        Project projectExpected = projectService.getProjectById(2);
+        Project projectExpected = projectService.getProjectById(2).get();
         assertEquals(project, projectExpected);
     }
 
     @After
     public void end() {
-        projectService.cleanTable();
-        ((ClassPathXmlApplicationContext) context).close();
+        context.close();
     }
 }

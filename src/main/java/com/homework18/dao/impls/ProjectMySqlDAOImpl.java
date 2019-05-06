@@ -41,9 +41,8 @@ public class ProjectMySqlDAOImpl implements ProjectDao {
     }
 
     @Override
-    public Project getProjectById(int id) {
-        Optional<Project> optionalProject = Optional.of(jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(Project.class)));
-        return optionalProject.orElseGet(Project::new);
+    public Optional<Project> getProjectById(int id) {
+        return Optional.of(jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(Project.class)));
     }
 
     public void cleanTable() {

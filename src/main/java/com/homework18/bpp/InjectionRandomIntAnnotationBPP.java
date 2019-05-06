@@ -17,7 +17,7 @@ public class InjectionRandomIntAnnotationBPP implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         for (Field field : bean.getClass().getDeclaredFields()) {
             InjectRandomInt annotation = field.getAnnotation(InjectRandomInt.class);
-            if (Objects.nonNull(annotation)) {
+            if (Objects.nonNull(annotation) && field.getType().equals(Integer.TYPE)) {
                 int min = annotation.min();
                 int max = annotation.max();
                 int randomInt = min + new Random().nextInt(max - min);
