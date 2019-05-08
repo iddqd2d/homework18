@@ -5,12 +5,12 @@ import com.homework18.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.Optional;
 
-@Component("mySqlDAO")
+@Repository("mySqlDAO")
 public class ProjectMySqlDAOImpl implements ProjectDao {
     private static final String CREATE = "INSERT INTO projects (name, balance) VALUES (?, ?);";
     private static final String READ = "SELECT * FROM projects WHERE id = ?;";

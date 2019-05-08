@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class ProjectMySqlDAOImplTest {
-    ClassPathXmlApplicationContext context;
-    ProjectMySqlDAOImpl projectService;
+    private ClassPathXmlApplicationContext context;
+    private ProjectMySqlDAOImpl projectService;
 
     @Before
     public void setup() {
