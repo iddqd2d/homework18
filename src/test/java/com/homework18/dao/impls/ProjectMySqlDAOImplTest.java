@@ -21,8 +21,9 @@ public class ProjectMySqlDAOImplTest {
 
     @Test
     public void createProject() {
-        Project project = context.getBean("project", Project.class);
+        Project project = new Project();
         project.setName("DC");
+        project.setId(2);
         projectService.createProject(project);
         Project projectExpected = projectService.getProjectById(2).get();
         assertEquals(project, projectExpected);
@@ -30,8 +31,9 @@ public class ProjectMySqlDAOImplTest {
 
     @Test
     public void deleteProject() {
-        Project project = context.getBean("project", Project.class);
+        Project project = new Project();
         project.setName("Dell");
+        project.setId(2);
         projectService.createProject(project);
         projectService.deleteProject(2);
         assertFalse(projectService.getProjectById(2).isPresent());
@@ -39,9 +41,9 @@ public class ProjectMySqlDAOImplTest {
 
     @Test
     public void updateProjectByName() {
-        Project project = context.getBean("project", Project.class);
+        Project project = new Project();
         project.setName("DC");
-        projectService.createProject(project);
+        project.setId(2);
         projectService.updateProjectByName(11111, "DC");
         Project projectExpected = projectService.getProjectById(2).get();
         assertEquals(projectExpected.getBalance(), 11111);
@@ -49,9 +51,9 @@ public class ProjectMySqlDAOImplTest {
 
     @Test
     public void getProjectById() {
-        Project project = context.getBean("project", Project.class);
+        Project project = new Project();
         project.setName("DC");
-        projectService.createProject(project);
+        project.setId(2);
         Project projectExpected = projectService.getProjectById(2).get();
         assertEquals(project, projectExpected);
     }

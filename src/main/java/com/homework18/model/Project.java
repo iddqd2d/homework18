@@ -6,8 +6,9 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
-@Component
 public class Project {
+    private Integer id;
+
     private String name;
 
     @InjectRandomInt(min = 1000, max = 10000)

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository("mySqlDAO")
 public class ProjectMySqlDAOImpl implements ProjectDao {
-    private static final String CREATE = "INSERT INTO projects (name, balance) VALUES (?, ?);";
+    private static final String CREATE = "INSERT INTO projects VALUES (?, ?, ?);";
     private static final String READ = "SELECT * FROM projects WHERE id = ?;";
     private static final String UPDATE = "UPDATE projects SET balance = ? WHERE name = ?;";
     private static final String DELETE = "DELETE FROM projects WHERE id = ?;";
@@ -27,7 +27,7 @@ public class ProjectMySqlDAOImpl implements ProjectDao {
 
     @Override
     public void createProject(Project project) {
-        jdbcTemplate.update(CREATE, new Object[]{project.getName(), project.getBalance()});
+        jdbcTemplate.update(CREATE, new Object[]{project.getId(),project.getName(), project.getBalance()});
     }
 
     @Override
